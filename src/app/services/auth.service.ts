@@ -1,11 +1,11 @@
-import { Platform, AlertController } from '@ionic/angular';
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { Storage } from '@ionic/storage';
-import { environment } from '../../environments/environment';
-import { tap, catchError } from 'rxjs/operators';
-import { BehaviorSubject } from 'rxjs';
+import {Platform, AlertController} from '@ionic/angular';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {JwtHelperService} from '@auth0/angular-jwt';
+import {Storage} from '@ionic/storage';
+import {environment} from '../../environments/environment';
+import {tap, catchError} from 'rxjs/operators';
+import {BehaviorSubject} from 'rxjs';
 
 const TOKEN_KEY = 'access_token';
 
@@ -43,16 +43,19 @@ export class AuthService {
 
   register(credentials) {
     return this.http.post(`${this.url}/register/`, credentials).pipe(
+      tap(res => {
+        this.showAlert('حساب کاربری شما ساخته شد.', true);
+      }),
       catchError(e => {
         let error_message = '';
-        if (e.error['username']){
-          error_message+=e.error['username'] +'<br>';
+        if (e.error['username']) {
+          error_message += e.error['username'] + '<br>';
         }
-        if (e.error['password']){
-          error_message+=e.error['password'] +'<br>';
+        if (e.error['password']) {
+          error_message += e.error['password'] + '<br>';
         }
-        if (e.error['email']){
-          error_message+=e.error['email'] +'<br>';
+        if (e.error['email']) {
+          error_message += e.error['email'] + '<br>';
         }
 
         this.showAlert(error_message);
@@ -99,12 +102,17 @@ export class AuthService {
     return this.authenticationState.value;
   }
 
-  showAlert(msg) {
+  showAlert(msg, reload = false) {
     let alert = this.alertController.create({
       message: msg,
       header: 'Error',
       buttons: ['OK']
     });
-    alert.then(alert => alert.present());
+    alert.then(alert => alert.present()).then(() => {
+      if (reload) {
+        window.location.reload();
+      }
+
+    });
   }
 }
