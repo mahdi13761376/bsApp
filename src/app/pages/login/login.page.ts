@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {AuthService} from '../../services/auth.service';
+import {tryCatch} from "rxjs/internal-compatibility";
 
 @Component({
   selector: 'app-login',
@@ -7,9 +10,51 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginPage implements OnInit {
 
-  constructor() { }
+  credentialsForm: FormGroup;
+  signupForm: FormGroup;
+
+  constructor(private formBuilder: FormBuilder, private authService: AuthService) {
+  }
 
   ngOnInit() {
+    this.credentialsForm = this.formBuilder.group({
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
+    this.signupForm = this.formBuilder.group({
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      password2: ['', [Validators.required, Validators.minLength(6)]],
+      email: ['', [Validators.required, Validators.email]],
+      first_name: ['', [Validators.required]],
+      last_name: ['', [Validators.required]]
+
+    });
+  }
+
+  onSubmitLogin() {
+    this.authService.login(this.credentialsForm.value).subscribe();
+  }
+
+  onSubmitSignup() {
+    if (this.signupForm.value['password'] == this.signupForm.value['password2'])
+      this.authService.register(this.signupForm.value).subscribe();
+    else
+      this.authService.showAlert('رمز های عبور یکسان نیست.')
+  }
+
+  register() {
+    const login_form = document.getElementById('login-form');
+    const signup_form = document.getElementById('signup-form');
+    login_form.hidden = true;
+    signup_form.hidden = false;
+  }
+
+  login() {
+    const login_form = document.getElementById('login-form');
+    const signup_form = document.getElementById('signup-form');
+    login_form.hidden = false;
+    signup_form.hidden = true;
   }
 
 }

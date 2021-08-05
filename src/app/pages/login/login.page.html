@@ -1,9 +1,59 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title dir="rtl">ورود</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <form id="login-form" [formGroup]="credentialsForm" (ngSubmit)="onSubmitLogin()">
 
+    <ion-item>
+      <ion-label dir="rtl" position="floating">نام‌کاربری</ion-label>
+      <ion-input formControlName="username"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label dir="rtl" position="floating">رمز‌عبور</ion-label>
+      <ion-input type="password" formControlName="password"></ion-input>
+    </ion-item>
+
+
+    <ion-button expand="full" type="submit" [disabled]="!credentialsForm.valid">ورود</ion-button>
+    <ion-button expand="full" type="button" (click)="register()">ساختن اکانت</ion-button>
+
+  </form>
+
+  <form hidden id="signup-form" [formGroup]="signupForm" (ngSubmit)="onSubmitSignup()">
+    <ion-item>
+      <ion-label dir="rtl" position="floating">نام کاربری</ion-label>
+      <ion-input formControlName="username"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label dir="rtl" position="floating">رمز‌عبور</ion-label>
+      <ion-input type="password" formControlName="password"></ion-input>
+    </ion-item>
+
+        <ion-item>
+          <ion-label dir="rtl" position="floating">تکرار رمز عبور</ion-label>
+          <ion-input type="password" formControlName="password2"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label dir="rtl" position="floating">ایمیل</ion-label>
+          <ion-input type="email" formControlName="email"></ion-input>
+        </ion-item>
+    <ion-item>
+      <ion-label dir="rtl" position="floating">نام</ion-label>
+      <ion-input formControlName="first_name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label dir="rtl" position="floating">نام خانوادگی</ion-label>
+      <ion-input formControlName="last_name"></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" type="submit" [disabled]="!signupForm.valid">ساخت اکانت</ion-button>
+    <ion-button expand="full" type="button" (click)="login()">وارد شدن</ion-button>
+
+  </form>
 </ion-content>

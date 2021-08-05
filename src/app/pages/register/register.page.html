@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title dir="rtl">ورود</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="credentialsForm" (ngSubmit)="onSubmit()">
+
+    <ion-item>
+      <ion-label dir="rtl" position="floating">نام‌کاربری</ion-label>
+      <ion-input type="email" formControlName="username"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label dir="rtl" position="floating">رمز‌عبور</ion-label>
+      <ion-input type="password" formControlName="password"></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" type="submit" [disabled]="!credentialsForm.valid">ورود</ion-button>
+    <ion-button expand="full" type="button" (click)="register()">ساختن اکانت</ion-button>
+    <ion-button expand="full" type="button" (click)="register()">وارد شدن</ion-button>
+
+  </form>
+</ion-content>
