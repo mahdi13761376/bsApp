@@ -1,16 +1,23 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Inside</ion-title>
+    <ion-title dir="rtl" >دستگاه</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  Welcome to the members only area!
 
-  <p>{{ data }}</p>
+  <ion-item hidden id='card' button  [routerLink]="['/main']" color="secondary">
+    <ion-label dir='rtl' id='card_label' >
+      
+    </ion-label>
+  </ion-item>
 
-  <ion-button expand="full" (click)="loadSpecialInfo()">Load Special Info</ion-button>
-  <ion-button expand="full" (click)="logout()">Logout</ion-button>
-  <ion-button expand="full" (click)="clearToken()">Clear JWT</ion-button>
+
+  <ion-fab id="pluss_button"  vertical="bottom" [routerLink]="['/add-device']"horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
 
 </ion-content>

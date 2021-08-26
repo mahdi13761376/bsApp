@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color='primary'>
+    <ion-title dir="rtl">اضافه‌کردن دستگاه</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form id="login-form" [formGroup]="addForm" (ngSubmit)="addDevice()">
+
+    <ion-item>
+      <ion-label dir="rtl" position="floating">سریال دستگاه</ion-label>
+      <ion-input formControlName="serial"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label dir="rtl" position="floating">دقت دستگاه</ion-label>
+      <ion-input type="number"  formControlName="acc"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label dir="rtl" position="floating">مود دستگاه</ion-label>
+      <ion-checkbox type="boolean" formControlName="mode"></ion-checkbox>
+    </ion-item>
+
+
+    <ion-button expand="full" type="submit"  [disabled]="!addForm.valid">فعال‌سازی دستگاه</ion-button>
+
+  </form>
+</ion-content>

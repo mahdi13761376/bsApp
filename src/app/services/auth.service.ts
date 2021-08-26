@@ -1,11 +1,12 @@
-import {Platform, AlertController} from '@ionic/angular';
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {JwtHelperService} from '@auth0/angular-jwt';
-import {Storage} from '@ionic/storage';
-import {environment} from '../../environments/environment';
-import {tap, catchError} from 'rxjs/operators';
-import {BehaviorSubject} from 'rxjs';
+import { Platform, AlertController } from '@ionic/angular';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { Storage } from '@ionic/storage';
+import { environment } from '../../environments/environment';
+import { tap, catchError } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
+import { tokenize } from '@angular/compiler/src/ml_parser/lexer';
 
 const TOKEN_KEY = 'access_token';
 
@@ -19,7 +20,7 @@ export class AuthService {
   authenticationState = new BehaviorSubject(false);
 
   constructor(private http: HttpClient, private helper: JwtHelperService, private storage: Storage,
-              private plt: Platform, private alertController: AlertController) {
+    private plt: Platform, private alertController: AlertController) {
     this.plt.ready().then(() => {
       this.checkToken();
     });
@@ -41,7 +42,7 @@ export class AuthService {
     });
   }
 
-  register(credentials) {
+  register(credentials: any) {
     return this.http.post(`${this.url}/register/`, credentials).pipe(
       tap(res => {
         this.showAlert('حساب کاربری شما ساخته شد.', true);
@@ -64,7 +65,7 @@ export class AuthService {
     );
   }
 
-  login(credentials) {
+  login(credentials: any) {
     return this.http.post(`${this.url}/api/token/`, credentials)
       .pipe(
         tap(res => {
@@ -102,7 +103,7 @@ export class AuthService {
     return this.authenticationState.value;
   }
 
-  showAlert(msg, reload = false) {
+  showAlert(msg: string, reload = false) {
     let alert = this.alertController.create({
       message: msg,
       header: 'Error',
@@ -114,5 +115,33 @@ export class AuthService {
       }
 
     });
+  }
+
+  getToken() {
+    return this.storage.get(TOKEN_KEY);
+  }
+
+  ini_request(token: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token
+      })
+    };
+    return this.http.get(`${this.url}/ini/`, httpOptions).pipe(res => {
+      return res;
+    }
+    )
+  }
+
+  add_device_request(token: string, acc: string, serial: string, mode: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token
+      })
+    };
+    return this.http.get(`${this.url}/add_device/?acc=` + acc + '&mode=' + mode + '&id=' + serial, httpOptions).pipe(res => {
+      return res;
+    }
+    )
   }
 }
