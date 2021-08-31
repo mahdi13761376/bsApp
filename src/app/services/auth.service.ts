@@ -144,4 +144,34 @@ export class AuthService {
     }
     )
   }
+  change_password_request(pass: string, token: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token,
+      })
+    };
+    return this.http.get(`${this.url}/change_pass/?password=` + pass, httpOptions).pipe(
+      res => {
+        return res;
+      });
+  }
+
+  change_device_request(mode: string, acc: string, token: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token,
+      })
+    };
+    if (mode)
+      return this.http.get(`${this.url}/change_device/?mode=True&acc=` + acc, httpOptions).pipe(
+        res => {
+          return res;
+        });
+    else
+      return this.http.get(`${this.url}/change_device/?mode=False&acc=` + acc, httpOptions).pipe(
+        res => {
+          return res;
+        });
+
+  }
 }

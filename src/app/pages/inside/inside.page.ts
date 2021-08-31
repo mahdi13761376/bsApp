@@ -21,7 +21,6 @@ export class InsidePage implements OnInit {
     this.authService.getToken().then(res => {
       if (res){
         this.authService.ini_request(res).subscribe(res => {
-          console.log(res);
           const add_button = document.getElementById('pluss_button');
           const label_text = document.getElementById('card_label');
           const card = document.getElementById('card');

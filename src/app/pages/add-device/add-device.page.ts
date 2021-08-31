@@ -19,7 +19,6 @@ export class AddDevicePage implements OnInit {
     this.addForm = this.formBuilder.group({
       serial: ['', [Validators.required]],
       acc: ['', [Validators.required]],
-      mode: ['', [Validators.required]]
     });
   }
 
@@ -46,7 +45,6 @@ export class AddDevicePage implements OnInit {
               this.router.navigate(['/main'])
             },
             async (error: any) => {
-              console.log(error);
               const toast = await this.toastController.create({
                 message: error.error,
                 duration: 2000
