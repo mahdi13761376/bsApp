@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import {tryCatch} from "rxjs/internal-compatibility";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,10 +14,13 @@ export class LoginPage implements OnInit {
   credentialsForm: FormGroup;
   signupForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService) {
+  constructor(private router: Router,private formBuilder: FormBuilder, private authService: AuthService) {
   }
 
   ngOnInit() {
+    if (this.authService.isAuthenticated){
+      this.router.navigate(['/main']);
+    }
     this.credentialsForm = this.formBuilder.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]]

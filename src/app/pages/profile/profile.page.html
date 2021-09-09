@@ -1,9 +1,49 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>profile</ion-title>
+  <ion-toolbar color='primary'>
+    <ion-title dir="rtl">حساب کاربری</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content dir="rtl">
+  <h1>اطلاعات کاربر</h1>
+  <ion-input id="user_name"></ion-input>
+  <ion-input id="user_lastname"></ion-input>
+  <ion-input id="user_username"></ion-input>
+  <ion-button expand="full" (click)="userChangeShow()">تغییر اطلاعات کاربر</ion-button>
+  <br>
 
+  <ion-button expand="full" (click)="logout()" dir="rtl" color="secondary">خروج از حساب</ion-button>
+  <form hidden id="change-user-form" [formGroup]="ChangeUserForm" (ngSubmit)="changeUser()">
+
+    <ion-item>
+      <ion-label dir="rtl" position="floating">کلمه‌عبور جدید</ion-label>
+      <ion-input type="password" formControlName="password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label dir="rtl" position="floating">تکرار کلمه عبور</ion-label>
+      <ion-input type="password" formControlName="password2"></ion-input>
+    </ion-item>
+    <ion-button expand="full" type="submit">تغییر کلمه‌عبور</ion-button>
+  </form>
+  <h1>اطلاعات دستگاه</h1>
+  <ion-input id="device_id"></ion-input>
+  <ion-input id="device_acc"></ion-input>
+  <ion-input id="device_mode"></ion-input>
+  <ion-button expand="full" (click)="deviceChangedShow()">تغییر اطلاعات دستگاه</ion-button>
+  <form hidden id="change-device-form" [formGroup]="ChangeDeviceForm" (ngSubmit)="changeDevice()">
+
+    <ion-item>
+      <ion-label dir="rtl" position="floating">دقت </ion-label>
+      <ion-input type="number" formControlName="acc"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label dir="rtl" position="floating">مود دستگاه</ion-label>
+      <ion-checkbox type="boolean" formControlName="mode"></ion-checkbox>
+    </ion-item>
+    <ion-button expand="full" type="submit">تغییر اطلاعات دستگاه</ion-button>
+
+
+  </form>
 </ion-content>

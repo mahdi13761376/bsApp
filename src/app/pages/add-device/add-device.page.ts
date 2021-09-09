@@ -19,6 +19,7 @@ export class AddDevicePage implements OnInit {
     this.addForm = this.formBuilder.group({
       serial: ['', [Validators.required]],
       acc: ['', [Validators.required]],
+      mode: ['', []],
     });
   }
 

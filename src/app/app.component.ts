@@ -25,7 +25,13 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-
+      this.platform.backButton.subscribeWithPriority(9999, () => {
+        document.addEventListener('backbutton', function (event) {
+          event.preventDefault();
+          event.stopPropagation();
+        }, false);
+      });
+      this.statusBar.styleDefault();
       this.authService.authenticationState.subscribe(state => {
         if (state) {
           this.router.navigate(['inside']);
