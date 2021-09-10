@@ -13,7 +13,6 @@ export class ProfilePage implements OnInit {
   private ChangeUserForm: FormGroup;
   private ChangeDeviceForm: FormGroup;
   constructor(private router: Router, private formBuilder: FormBuilder, private toastController: ToastController, private authService: AuthService) { }
-
   ngOnInit() {
     this.ChangeUserForm = this.formBuilder.group({
       password: ['', [Validators.required]],
