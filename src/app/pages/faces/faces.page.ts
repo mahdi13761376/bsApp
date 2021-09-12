@@ -31,6 +31,5 @@ export class FacesPage implements OnInit {
 
 
   ngOnInit() {
-    console.log('ey vay');
   }
 }
