@@ -20,6 +20,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/main/main.module').then(m => m.MainPageModule),
     canActivate: [AuthGuardService]
   },
+  {
+    path: 'new-face',
+    loadChildren: () => import('./pages/new-face/new-face.module').then( m => m.NewFacePageModule)
+  },
   // {
   //   path: 'profile',
   //   loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)

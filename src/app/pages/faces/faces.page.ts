@@ -12,8 +12,8 @@ export class FacesPage implements OnInit {
   }
 
   public ionViewWillEnter() {
-    console.log('eyval');
     const card_container = document.getElementById('card-container');
+    card_container.innerHTML = '';
     this.authService.getToken().then(res => {
       if (res) {
         this.authService.faces_request(res).subscribe(res => {

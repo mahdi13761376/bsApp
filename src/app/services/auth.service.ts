@@ -187,4 +187,16 @@ export class AuthService {
     }
     )
   }
+
+  known_faces_request(token: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token
+      })
+    };
+    return this.http.get(`${this.url}/get_known_faces/`, httpOptions).pipe(res => {
+      return res;
+    }
+    )
+  }
 }
