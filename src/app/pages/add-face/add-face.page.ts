@@ -39,7 +39,7 @@ export class AddFacePage implements OnInit {
         this.authService.known_faces_request(res).subscribe(res => {
           console.log(res);
           for (var i in res) {
-            card_container.innerHTML = card_container.innerHTML +  "<ion-card> <img height='100%' width='100%' src='" + res[i].link + "'>" +
+            card_container.innerHTML = card_container.innerHTML +  "<ion-card> <img  width='100%' src='" + res[i].link + "'>" +
               "<ion-card-header> <ion-card-subtitle dir='rtl'> " + res[i].name + "</ion-card-subtitle> </ion-card-header> </ion-card>";
 
 
@@ -48,9 +48,7 @@ export class AddFacePage implements OnInit {
       }
     });
   }
-  public salam(){
-    console.log('salam');
-  }
+
 
   ngOnInit() {
   }

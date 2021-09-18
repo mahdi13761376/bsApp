@@ -1,9 +1,20 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>new-face</ion-title>
+  <ion-toolbar color='primary'>
+    <ion-title dir="rtl">اضافه کردن چهره</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+<ion-item>
 
+    <ion-label dir="rtl" position="floating">نام</ion-label>
+    <ion-input id='name' ></ion-input>
+</ion-item>
+
+  <ion-item>
+    <ion-label dir="rtl" position="floating">نام خانوادگی</ion-label>
+    <ion-input id="family" ></ion-input>
+  </ion-item>
+
+  <ion-button expand="full" [disabled]="!checkNameAndFamily()" (click)="addPhotoToGallery()">دوربین</ion-button>
 </ion-content>
