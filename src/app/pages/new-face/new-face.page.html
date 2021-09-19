@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<!-- <ion-content>
 <ion-item>
 
     <ion-label dir="rtl" position="floating">نام</ion-label>
@@ -17,4 +17,22 @@
   </ion-item>
 
   <ion-button expand="full" [disabled]="!checkNameAndFamily()" (click)="addPhotoToGallery()">دوربین</ion-button>
+</ion-content> -->
+<ion-content padding>
+  <canvas display='block' margin-left='auto' margin-right='auto' id="compare" width="320" height="240" style="display:none"></canvas>
+  <video display='block' margin-left='auto' margin-right='auto' id="video" autoplay loop width="320" height="240"></video>
+  <canvas display='block' margin-left='auto' margin-right='auto'  width="320" height="240" #overlay></canvas>
+  <canvas display='block' margin-left='auto' margin-right='auto'  width="320" height="240" #image></canvas>
+  <ion-item>
+
+    <ion-label dir="rtl" position="floating">نام</ion-label>
+    <ion-input id='name' ></ion-input>
+</ion-item>
+
+  <ion-item>
+    <ion-label dir="rtl" position="floating">نام خانوادگی</ion-label>
+    <ion-input id="family" ></ion-input>
+  </ion-item>
+
+  <ion-button expand="full" [disabled]="!checkNameAndFamily()" (click)="takePhoto()">دوربین</ion-button>
 </ion-content>
