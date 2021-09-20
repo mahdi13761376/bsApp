@@ -35,4 +35,6 @@
   </ion-item>
 
   <ion-button expand="full" [disabled]="!checkNameAndFamily()" (click)="takePhoto()">دوربین</ion-button>
+  <ion-button hidden id="send_img" expand="full" [disabled]="!checkNameAndFamily()" (click)="send_img_to_server()">تعریف چهره جدید</ion-button>
+
 </ion-content>

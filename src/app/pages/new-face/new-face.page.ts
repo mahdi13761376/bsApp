@@ -28,17 +28,13 @@ platformBrowserDynamic()
   styleUrls: ['./new-face.page.scss'],
 })
 export class NewFacePage implements OnInit {
-  private  name:any;
-  private family:any;
+  private  name:string;
+  private family:string;
+  private img:string;
+
 
   ngOnInit() {
-    this.authService.getToken().then(res => {
-      if (res) {
-        this.authService.add_face_request(res).subscribe(res => {
-          console.log(res);
-        });
-      }
-    });
+ 
   }
 
   checkNameAndFamily(){
@@ -122,7 +118,19 @@ export class NewFacePage implements OnInit {
     canvas.height = videoGet.height;
     canvas.getContext('2d').drawImage(videoGet, 0, 0, canvas.width, canvas.height);
     let img = canvas.toDataURL();
-    console.log(img);
+    this.img = img;
+    const send = document.getElementById('send_img');
+    send.hidden = false;
+  }
+
+  send_img_to_server(){
+    this.authService.getToken().then(res => {
+      if (res) {
+        this.authService.add_face_request(res,this.name, this.family, this.img).subscribe(res => {
+          console.log(res);
+        });
+      }
+    });
   }
 
 }
