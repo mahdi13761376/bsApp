@@ -217,5 +217,17 @@ export class AuthService {
 
     return this.http.post(`${this.url}/add_face/`, postData, header);
   }
+
+  open_request(token: string, link:string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token
+      })
+    };
+    return this.http.get(link, httpOptions).pipe(res => {
+      return res;
+    }
+    )
+  }
 }
 
