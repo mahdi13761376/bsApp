@@ -26,14 +26,7 @@ export class FacesPage implements OnInit {
               card_value += "      " + res[i].name + "</ion-card-subtitle> </ion-card-header></ion-card-subtitle>";
             }
             card_value += "</ion-card>";
-
-            if (res[i].need_open) {
-              console.log(res[i].need_open);
-              card_value += "<ion-button type='button' (click)='send_open($event, item)'>باز کردن در</ion-button>"
-            }
             card_container.innerHTML += card_value;
-
-
           }
         });
       }
@@ -43,7 +36,6 @@ export class FacesPage implements OnInit {
   }
 
   send_open(){
-    console.log(this.link);
     this.authService.getToken().then(res => {
       if (res) {
         this.authService.open_request(res, this.link).subscribe(res => {
